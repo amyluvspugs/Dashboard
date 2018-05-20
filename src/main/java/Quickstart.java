@@ -103,91 +103,48 @@ public class Quickstart {
         com.google.api.services.calendar.Calendar service =
                 getCalendarService();
 
-        //TODO create calendarid array
-        //  primary // built in for email
-        // kamsmommy@gmail.com // Me
-        // jeffshenning@gmail.com // Jeff
-        // henninggirl1@gmail.com // K
-        // henninggirl2@gmail.com // A
-        // henninggirl3@gmail.com // M
-        // t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com //LHSS
-        // 58nil80fqtf56i1cv7h96udals@group.calendar.google.com // Henning Family
-        // #contacts@group.v.calendar.google.com  // Birthdays
-        // o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com // General
-        // en.usa#holiday@group.v.calendar.google.com // US Holidays
+        //TODO create calendarId array
+        String[] calendarId = new String[11];
+        calendarId[0] = "primary"; // built in for email
+        calendarId[1] = "kamsmommy@gmail.com"; // Me
+        calendarId[2] = "jeffshenning@gmail.com"; // Jeff
+        calendarId[3] = "henninggirl1@gmail.com"; // K
+        calendarId[4] = "henninggirl2@gmail.com"; // A
+        calendarId[5] = "henninggirl3@gmail.com"; // M
+        calendarId[6] = "t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com"; //LHSS
+        calendarId[7] = "58nil80fqtf56i1cv7h96udals@group.calendar.google.com"; // Henning Family
+        calendarId[8] = "#contacts@group.v.calendar.google.com";  // Birthdays
+        calendarId[9] = "o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com"; // General
+        calendarId[10] = "en.usa#holiday@group.v.calendar.google.com"; // US Holidays
 
 
-        // List the next 10 events from the primary calendar.
-        DateTime now = new DateTime(System.currentTimeMillis());
-        Events events = service.events().list("primary")
-                .setMaxResults(10)
-                .setTimeMin(now)
-                .setOrderBy("startTime")
-                .setSingleEvents(true)
-                .execute();
-        List<Event> items = events.getItems();
-        if (items.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events");
-            for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
+        // List the next 10 events from the calendar.
+        for(int loop = 0; loop<calendarId.length; loop++) {
+
+            DateTime now = new DateTime(System.currentTimeMillis());
+            Events events = service.events().list(calendarId[loop])
+                    .setMaxResults(10)
+                    .setTimeMin(now)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
+            List<Event> items = events.getItems();
+            if (items.size() == 0) {
+                System.out.println("No upcoming events found.");
+            } else {
+                //TODO figure out how to print current calendar name
+                //System.out.println("Upcoming events from the " + events.getId() + " calendar:");
+                System.out.println();
+                for (Event event : items) {
+                    DateTime start = event.getStart().getDateTime();
+                    if (start == null) {
+                        start = event.getStart().getDate();
+                    }
+                    System.out.printf("%s (%s)\n", event.getSummary(), start);
                 }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
             }
         }
 
-
-        // **ADDITIONAL - TRYING TO ACCESS THE OTHER CALENDARS
-        // List the next 10 events from the specified calendar.
-        System.out.println();
-        System.out.println("Printing from MY CALENDAR");
-        DateTime now2 = new DateTime(System.currentTimeMillis());
-        Events events2 = service.events().list("kamsmommy@gmail.com")
-                .setMaxResults(10)
-                .setTimeMin(now2)
-                .setOrderBy("startTime")
-                .setSingleEvents(true)
-                .execute();
-        List<Event> items3 = events2.getItems();
-        if (items3.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events2");
-            for (Event event : items3) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
-                }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
-            }
-        }
-
-        // List the next 10 events from the specified calendar.
-        System.out.println();
-        System.out.println("Printing from JEFF'S CALENDAR");
-        DateTime now3 = new DateTime(System.currentTimeMillis());
-        Events events3 = service.events().list("jeffshenning@gmail.com")
-                .setMaxResults(10)
-                .setTimeMin(now3)
-                .setOrderBy("startTime")
-                .setSingleEvents(true)
-                .execute();
-        List<Event> items4 = events3.getItems();
-        if (items4.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events3");
-            for (Event event : items4) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
-                }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
-            }
-        }
 
 
 ////  This works - just not using right now. **
