@@ -10,12 +10,14 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.client.util.DateTime;
 
+import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -100,21 +102,24 @@ public class Quickstart {
         // Build a new authorized API client service.
         // Note: Do not confuse this class with the
         //   com.google.api.services.calendar.model.Calendar class.
-        com.google.api.services.calendar.Calendar service =
+        Calendar service =
                 getCalendarService();
 
         //TODO create calendarid array
-        //  primary // built in for email
-        // kamsmommy@gmail.com // Me
-        // jeffshenning@gmail.com // Jeff
-        // henninggirl1@gmail.com // K
-        // henninggirl2@gmail.com // A
-        // henninggirl3@gmail.com // M
-        // t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com //LHSS
-        // 58nil80fqtf56i1cv7h96udals@group.calendar.google.com // Henning Family
-        // #contacts@group.v.calendar.google.com  // Birthdays
-        // o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com // General
-        // en.usa#holiday@group.v.calendar.google.com // US Holidays
+
+        ArrayList<String> calendarArray = new ArrayList<String>();
+        calendarArray.add("primary"); // built in for email
+        calendarArray.add("kamsmommy@gmail.com");//Me
+        calendarArray.add("jeffshenning@gmail.com"); // Jeff
+        calendarArray.add("henninggirl1@gmail.com"); // K
+        calendarArray.add("henninggirl2@gmail.com"); // A
+        calendarArray.add("henninggirl3@gmail.com"); // M
+        calendarArray.add("t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com"); //LHSS
+        calendarArray.add("58nil80fqtf56i1cv7h96udals@group.calendar.google.com"); // Henning Family
+        calendarArray.add("#contacts@group.v.calendar.google.com");  // Birthdays
+        calendarArray.add("o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com"); // General
+        calendarArray.add("en.usa#holiday@group.v.calendar.google.com"); // US Holidays
+
 
 
         // List the next 10 events from the primary calendar.
@@ -138,7 +143,6 @@ public class Quickstart {
                 System.out.printf("%s (%s)\n", event.getSummary(), start);
             }
         }
-
 
         // **ADDITIONAL - TRYING TO ACCESS THE OTHER CALENDARS
         // List the next 10 events from the specified calendar.
@@ -166,57 +170,32 @@ public class Quickstart {
         }
 
         // List the next 10 events from the specified calendar.
-        System.out.println();
-        System.out.println("Printing from JEFF'S CALENDAR");
-        DateTime now3 = new DateTime(System.currentTimeMillis());
-        Events events3 = service.events().list("jeffshenning@gmail.com")
-                .setMaxResults(10)
-                .setTimeMin(now3)
-                .setOrderBy("startTime")
-                .setSingleEvents(true)
-                .execute();
-        List<Event> items4 = events3.getItems();
-        if (items4.size() == 0) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events3");
-            for (Event event : items4) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
+        int x = 0;
+        while (x != calendarArray.size()) {
+            String calendar = calendarArray.get(x);
+            System.out.println();
+            System.out.println("Printing from " + calendar + " CALENDAR");
+            DateTime now3 = new DateTime(System.currentTimeMillis());
+            Events events3 = service.events().list(calendar)
+                    .setMaxResults(10)
+                    .setTimeMin(now3)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
+            List<Event> items4 = events3.getItems();
+            if (items4.size() == 0) {
+                System.out.println("No upcoming events found.");
+            } else {
+                System.out.println("Upcoming events3");
+                for (Event event : items4) {
+                    DateTime start = event.getStart().getDateTime();
+                    if (start == null) {
+                        start = event.getStart().getDate();
+                    }
+                    System.out.printf("%s (%s)\n", event.getSummary(), start);
                 }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
             }
+            x++;
         }
-
-
-////  This works - just not using right now. **
-//// Iterate through entries in calendar list
-//
-//        String pageToken = null;
-//        do {
-//            CalendarList calendarList = service.calendarList().list().setPageToken(pageToken).execute();
-//            List<CalendarListEntry> items2 = calendarList.getItems();
-//
-//            for (CalendarListEntry calendarListEntry : items2) {
-//                System.out.println("summary: " + calendarListEntry.getSummary());
-//                System.out.println("id: " + calendarListEntry.getId());
-//            }
-//            pageToken = calendarList.getNextPageToken();
-//        } while (pageToken != null);
-
-
-
-/* Not using - not sure that it worked
-// Retrieve a specific calendar list entry
-        System.out.println("Testing this part");
-        //CalendarListEntry calendarListEntry = service.calendarList().get("calendarID").execute();
-        CalendarListEntry calendarListEntry = service.calendarList().get("jeffshenning@gmail.com").execute();
-
-        System.out.println(calendarListEntry.getSummary());
-
-*/
-
     }
-
 }
