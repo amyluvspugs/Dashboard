@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GoogleAPI.iml" filepath="$PROJECT_DIR$/.idea/modules/GoogleAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Dashboard.iml" filepath="$PROJECT_DIR$/.idea/modules/Dashboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/../GoogleAPITest/src/GoogleAPITest.iml" filepath="$PROJECT_DIR$/../GoogleAPITest/src/GoogleAPITest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GoogleAPI_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GoogleAPI_main.iml" group="GoogleAPI" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GoogleAPI_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GoogleAPI_test.iml" group="GoogleAPI" />
     </modules>
   </component>
 </project>

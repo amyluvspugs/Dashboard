@@ -6,10 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GoogleAPI" />
+        <module name="Dashboard" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Dashboard" target="1.7" />
       <module name="GoogleAPI" target="1.7" />
       <module name="GoogleAPI_main" target="1.7" />
       <module name="GoogleAPI_test" target="1.7" />

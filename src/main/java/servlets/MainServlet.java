@@ -1,7 +1,7 @@
 package servlets;
 
 import database.DBConnector;
-import Quickstart;
+//import Quickstart;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +24,7 @@ public class MainServlet extends HttpServlet {
 
         Date now = new Date(); // The current date/time
 
-        Quickstart calendar = new Quickstart();
+       // Quickstart calendar = new Quickstart();
 
 
        // attempting to add css
