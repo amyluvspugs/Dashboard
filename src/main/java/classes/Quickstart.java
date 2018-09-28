@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -137,26 +140,37 @@ public class Quickstart {
         // List the next 10 events from the calendar.
         for (int loop = 0; loop < calendarId.length; loop++) {
 
-            DateTime now = new DateTime(System.currentTimeMillis());
-            System.out.println("Date time: " + now);
-            Date d = new java.util.Date();
-          //  LocalDate today = LocalDate.now();
-            Date today = new Date();
-            Date tomorrow = new Date(now + (1000 * 60 * 60 * 24));
+          //  DateTime now = new DateTime(System.currentTimeMillis());
+          //  System.out.println("Date time: " + now);
+          //  Date d = new java.util.Date();
+
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime startofDay = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0);
+           DateTime gStartofDay = new DateTime(startofDay.toEpochSecond(ZoneOffset.ofHours(-5))*1000);
+            // Date today = new Date();
+
+            System.out.println("gDate: " + gStartofDay);
+            //DateTime tomorrow = new LocalDate(today);
+
+           // System.out.println("Date startofDay: " + startofDay);
+
+            //DateTime tomorrow = new DateTime(System.currentTimeMillis());
+            //tomorrow = (now + (1000 * 60 * 60 * 24));
+
 //
             Events events = service.events().list(calendarId[loop])
-                    .setTimeMin(now)
-                    .setTimeMax(today)
-                    .setOrderBy("startTime")
-                    .setSingleEvents(true)
-                    .execute();
-
-//                    .setMaxResults(3)
-//                    //.setTimeMax(tomorrow);
 //                    .setTimeMin(now)
+ //                   .setTimeMax(today)
 //                    .setOrderBy("startTime")
 //                    .setSingleEvents(true)
 //                    .execute();
+
+                    .setMaxResults(3)
+                    //.setTimeMax(tomorrow);
+                    .setTimeMin(gStartofDay)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
 
             List<Event> itemsC = events.getItems();
             //items.add(events.getItems());
