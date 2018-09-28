@@ -1,27 +1,27 @@
 
 body {
-
-    font-family: 'Lato', Calibri, Arial, sans-serif;
-    color: #f2ede3;
-    background: #333;
+    font-family: 'Spirax', cursive;
+    color: #B6A5A5;
+    background: #E1C8BA;
     font-size: 0.9em;
     font-weight: 300;
 }
-
+.css-selector {
+  font-family: 'Tangerine', serif;
+}
 h1 {
-    background: #ea4c88;
+    background: #B6A5A5;
 }
 #container {
     width: 960px;
     margin: 0 auto;
-
 }
 #primary {
     float: left;
     width: 240px;
-    background: #909090;
 }
 #content {
+    font-family: 'Spirax', cursive;
     float: left;
     width: 480px;
 }

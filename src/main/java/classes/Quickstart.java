@@ -20,8 +20,10 @@ import com.google.api.services.calendar.model.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Quickstart {
@@ -136,25 +138,25 @@ public class Quickstart {
         for (int loop = 0; loop < calendarId.length; loop++) {
 
             DateTime now = new DateTime(System.currentTimeMillis());
-            //System.out.println("Date time: " + now);
-            //Date d = new java.util.Date();
-            //LocalDate today = LocalDate.now();
-//            Date today = new Date();
-            //Date tomorrow = new Date(now + (1000 * 60 * 60 * 24));
+            System.out.println("Date time: " + now);
+            Date d = new java.util.Date();
+          //  LocalDate today = LocalDate.now();
+            Date today = new Date();
+            Date tomorrow = new Date(now + (1000 * 60 * 60 * 24));
 //
             Events events = service.events().list(calendarId[loop])
-//                    .setTimeMin(now)
-//                    .setTimeMax(today)
-//                    .setOrderBy("startTime")
-//                    .setSingleEvents(true)
-//                    .execute();
-
-                    .setMaxResults(3)
-                    //.setTimeMax(tomorrow);
                     .setTimeMin(now)
+                    .setTimeMax(today)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
                     .execute();
+
+//                    .setMaxResults(3)
+//                    //.setTimeMax(tomorrow);
+//                    .setTimeMin(now)
+//                    .setOrderBy("startTime")
+//                    .setSingleEvents(true)
+//                    .execute();
 
             List<Event> itemsC = events.getItems();
             //items.add(events.getItems());
@@ -172,7 +174,7 @@ public class Quickstart {
                     String a;
                     x = event.getSummary();
                     y = event.getStart();
-                    z = event.getDescription();
+                    z = event.getDescription();  /// want to change this to calendarID
                     a = event.getStart().toString();
                     items.add(new CalItems(x,a,z));
                 }
