@@ -124,73 +124,64 @@ public class Quickstart {
                 getCalendarService();
 
         List<CalItems> items = new ArrayList<>();
-        String[] calendarId = new String[11];
-        calendarId[0] = "primary"; // built in for email
-        calendarId[1] = "kamsmommy@gmail.com"; // Me
-        calendarId[2] = "jeffshenning@gmail.com"; // Jeff
-        calendarId[3] = "henninggirl1@gmail.com"; // K
-        calendarId[4] = "henninggirl2@gmail.com"; // A
-        calendarId[5] = "henninggirl3@gmail.com"; // M
-        calendarId[6] = "t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com"; //LHSS
-        calendarId[7] = "58nil80fqtf56i1cv7h96udals@group.calendar.google.com"; // Henning Family
-        calendarId[8] = "#contacts@group.v.calendar.google.com";  // Birthdays
-        calendarId[9] = "o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com"; // General
-        calendarId[10] = "en.usa#holiday@group.v.calendar.google.com"; // US Holidays
+        String[][] calendarId = new String[][]{
+                        {"primary", "my email", "green"},
+                        {"kamsmommy@gmail.com", "Amy", "green"}, // Me
+                        {"jeffshenning@gmail.com", "Jeff", "blue"},
+                        {"henninggirl1@gmail.com", "Kaitlin", "red"},
+                        {"henninggirl2@gmail.com", "Aubrey", "orange"},
+                        {"henninggirl3@gmail.com", "Mallory", "yellow"},
+                        {"t03dkgt4gvqm1tl792hcm0ql88@group.calendar.google.com", "LHSS", "black"},
+                        {"58nil80fqtf56i1cv7h96udals@group.calendar.google.com", "Henning Family", "brown"},
+                        {"#contacts@group.v.calendar.google.com", "Birthdays", "grey"},
+                        {"o22mk8hghlccklg0q5tipel4r8@group.calendar.google.com", "General", "grey"},
+                        {"en.usa#holiday@group.v.calendar.google.com", "US Holidays", "grey"}
+                };
+
 
         // List the next 10 events from the calendar.
         for (int loop = 0; loop < calendarId.length; loop++) {
 
-          //  DateTime now = new DateTime(System.currentTimeMillis());
-          //  System.out.println("Date time: " + now);
-          //  Date d = new java.util.Date();
-
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime startofDay = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0);
-           DateTime gStartofDay = new DateTime(startofDay.toEpochSecond(ZoneOffset.ofHours(-5))*1000);
-            // Date today = new Date();
+            LocalDateTime endofDay = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 23, 59);
+            DateTime gStartofDay = new DateTime(startofDay.toEpochSecond(ZoneOffset.ofHours(-5))*1000);
+            DateTime gEndofDay = new DateTime(endofDay.toEpochSecond(ZoneOffset.ofHours(-5))*1000);
 
-            System.out.println("gDate: " + gStartofDay);
-            //DateTime tomorrow = new LocalDate(today);
+            System.out.println("gStartDate: " + gStartofDay);
+            System.out.println("gEndDate: " + gEndofDay);
 
-           // System.out.println("Date startofDay: " + startofDay);
+            Events events = service.events().list(calendarId[loop][0])
+                //.setMaxResults(3)
 
-            //DateTime tomorrow = new DateTime(System.currentTimeMillis());
-            //tomorrow = (now + (1000 * 60 * 60 * 24));
-
-//
-            Events events = service.events().list(calendarId[loop])
-//                    .setTimeMin(now)
- //                   .setTimeMax(today)
-//                    .setOrderBy("startTime")
-//                    .setSingleEvents(true)
-//                    .execute();
-
-                    .setMaxResults(3)
-                    //.setTimeMax(tomorrow);
-                    .setTimeMin(gStartofDay)
-                    .setOrderBy("startTime")
-                    .setSingleEvents(true)
-                    .execute();
+                .setTimeMin(gStartofDay)
+                .setTimeMax(gEndofDay)
+                .setOrderBy("startTime")
+                .setSingleEvents(true)
+                .execute();
 
             List<Event> itemsC = events.getItems();
             //items.add(events.getItems());
 
-            //System.out.println("EVENTS LIST: " + events.getItems()); //prints all events and properties
             if (itemsC.size() == 0) {
                 // System.out.println("No upcoming events found.");
             } else {
-                //TODO figure out how to print current calendar name
 
                 for (Event event : itemsC) {
                     String x;
-                    EventDateTime y;
+                    //EventDateTime y;
                     String z;
                     String a;
+                    String c;
                     x = event.getSummary();
-                    y = event.getStart();
-                    z = event.getDescription();  /// want to change this to calendarID
+                   // y = event.getStart();
+                   //z = event.getDescription();  /// want to change this to calendarID
+                    //z = service.events().list(calendarId[loop]);
+                    z = calendarId[loop][1];
+                    System.out.println("Z value is calendarID loop, 0: " + z);
+                    c = calendarId[loop][2];
                     a = event.getStart().toString();
-                    items.add(new CalItems(x,a,z));
+                    items.add(new CalItems(x,a,z,c));
                 }
             }
         }

@@ -6,14 +6,16 @@ public class CalItems {
     private String title;
     private String time;
     private String owner;   // This will be the CalendarID
+    private String color;
 
 
-    public CalItems(String title, String time, String owner){
+    public CalItems(String title, String time, String owner, String color){
         super();
         this.title = title;
         //this.time = time;
         setTime(time);
         this.owner = owner;
+        this.color = color;
     }
 
     public CalItems(){
@@ -57,5 +59,12 @@ public class CalItems {
     }
     public void setOwner(String owner){
         this.owner = owner;
+    }
+
+    public String getColor(){
+        return color;
+    }
+    public void setColor(String color){
+        this.color = color;
     }
 }

@@ -10,7 +10,7 @@ body {
 /* Style the header */
 .header {
     background-color: #f1f1f1;
-    padding: 30px;
+    padding: 20px;
     text-align: center;
     font-size: 25px;
 }
@@ -52,3 +52,38 @@ body {
         width: 100%;
     }
 }
+
+li{
+list-style:circle;
+color: purple;
+}
+
+
+ul {
+    margin: 0 0 0 32px;
+    line-height: 1.5
+}
+.b1 {
+    list-style-image: url(http://upload.wikimedia.org/wikipedia/commons/1/19/Icons-mini-icon_attachment.gif);
+}
+.b2 {
+    list-style-image: url(img/swirl-bullet2.png);
+}
+.b3 {
+    list-style-image: url(img/Kaitlin2.jpg);
+}
+
+
+
+
+.menu {
+  padding:0;
+  margin:0;
+  }
+
+.bullet {
+  padding-left: 1em;
+  text-indent: -.7em;
+  content: "• ";
+  color: blue; /* or whatever color you prefer */
+  }
