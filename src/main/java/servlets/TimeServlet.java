@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class TimeServlet extends HttpServlet {
         public void doGet(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
+                throws IOException {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
 

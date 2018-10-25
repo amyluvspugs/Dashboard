@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 public class LogoutServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         //invalidate the session if exists
         HttpSession session = request.getSession(false);

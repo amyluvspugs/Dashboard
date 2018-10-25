@@ -7,13 +7,15 @@
 </head>
 <body>
 
-    <form action="${pageContext.servletContext.contextPath}/LoginServlet" method="post">
+    <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
+
     Username: <input type="text" name="username">
     <br>
     Password: <input type="password" name="pwd">
     <br><br>
     <input type="submit" value="Login">
-</form>
+
+    </form>
 
 </body>
 </html>
