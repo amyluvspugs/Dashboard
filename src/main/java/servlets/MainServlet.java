@@ -1,8 +1,8 @@
 package servlets;
 
+import classes.*;
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import database.DBConnector;
-import classes.CalItems;
-import classes.Quickstart;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +16,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import classes.Quote;
 
 public class MainServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+      List<Task> tasklist = TaskList.getTaskList();
+      request.setAttribute("tasklist_list", tasklist);
 
       List<CalItems> items = Quickstart.getItems();
       request.setAttribute("calendar_list", items);

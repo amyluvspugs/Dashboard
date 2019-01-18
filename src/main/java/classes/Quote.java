@@ -22,10 +22,9 @@ public class Quote {
     public void setQuote() {
         try {
             Connection conn = new DBConnector().getConn();
-            //statement = conn.createStatement();
             statement = conn.createStatement();
             //resultSet = statement.executeQuery("SELECT * FROM quotes");
-            resultSet = statement.executeQuery("SELECT * FROM QUOTES where idQuotes=10");
+            resultSet = statement.executeQuery("SELECT * FROM QUOTES where idQuotes=16");
             resultSet.next();
 
             quote = resultSet.getString("quote");

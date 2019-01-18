@@ -27,6 +27,21 @@
         <servlet-class>servlets.LogoutServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>servlets.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateTaskServlet</servlet-name>
+        <servlet-class>servlets.CreateTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <servlet-class>servlets.UpdateTaskServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/main</url-pattern>
@@ -47,4 +62,18 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateTaskServlet</servlet-name>
+        <url-pattern>/createTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <url-pattern>/updateTask</url-pattern>
+    </servlet-mapping>
 </web-app>
